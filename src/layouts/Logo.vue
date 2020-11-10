@@ -1,6 +1,6 @@
 <template>
-  <div class="app-logo anticon" @click="handleGoHome" :style="wrapStyle">
-    <img :src="logo" />
+  <div class="app-logo anticon" :class="theme" @click="handleGoHome" :style="wrapStyle">
+    <img src="/@/assets/images/logo.png" />
     <div v-if="show" class="logo-title ml-2 ellipsis">{{ globSetting.title }}</div>
   </div>
 </template>
@@ -14,8 +14,6 @@
   import { PageEnum } from '/@/enums/pageEnum';
   import { MenuTypeEnum } from '../enums/menuEnum';
 
-  import logo from '/@/assets/images/logo.png';
-
   import { menuStore } from '../store/modules/menu';
   import { appStore } from '../store/modules/app';
 
@@ -25,6 +23,10 @@
       showTitle: {
         type: Boolean as PropType<boolean>,
         default: true,
+      },
+      theme: {
+        type: String,
+        default: '',
       },
     },
     setup(props) {
@@ -65,7 +67,6 @@
         handleGoHome,
         globSetting,
         show: showRef,
-        logo,
         wrapStyle,
       };
     },
@@ -80,6 +81,9 @@
     padding-left: 16px;
     cursor: pointer;
     // justify-content: center;
+    &.light {
+      border-bottom: 1px solid @border-color-base;
+    }
 
     .logo-title {
       font-size: 18px;
